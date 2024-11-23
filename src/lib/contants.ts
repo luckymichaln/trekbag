@@ -5,8 +5,20 @@ export const initialItems = [
 ];
 
 export const buttonsGroup = [
-  "Mark all as complete",
-  "Mark all as incomplete",
-  "Reset to initial",
-  "Remove all items",
+  {
+    label: "Mark all as complete",
+    role: "complete",
+  },
+  {
+    label: "Mark all as incomplete",
+    role: "incomplete",
+  },
+  {
+    label: "Reset to initial",
+    role: "reset",
+  },
+  {
+    label: "Remove all items",
+    role: "remove",
+  },
 ];

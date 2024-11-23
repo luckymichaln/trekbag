@@ -2,13 +2,18 @@ import { clsx } from "clsx";
 
 type ButtonProps = {
   label: string;
-  type?: "secondary";
+  buttonType?: "secondary";
+  onClick: () => void;
 };
 
-export const Button = ({ type, label }: ButtonProps) => {
+export const Button = ({ buttonType, label, onClick }: ButtonProps) => {
   const buttonClass = clsx("btn", {
-    "btn--secondary": type === "secondary",
+    "btn--secondary": buttonType === "secondary",
   });
 
-  return <button className={buttonClass}>{label}</button>;
+  return (
+    <button onClick={onClick} className={buttonClass}>
+      {label}
+    </button>
+  );
 };
