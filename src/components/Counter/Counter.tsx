@@ -1,15 +1,15 @@
 type CounterProps = {
-  itemsPackedAmount: number;
+  packedItemsAmount: number;
   allItemsAmount: number;
 };
 
 export const Counter = ({
-  itemsPackedAmount,
+  packedItemsAmount,
   allItemsAmount,
 }: CounterProps) => {
   return (
     <p>
-      <b>{itemsPackedAmount}</b> / {allItemsAmount} items packed
+      <b>{packedItemsAmount}</b> / {allItemsAmount} items packed
     </p>
   );
 };

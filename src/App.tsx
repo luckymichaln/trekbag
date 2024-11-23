@@ -74,7 +74,7 @@ function App() {
         <Header>
           <Logo />
           <Counter
-            itemsPackedAmount={itemsPacked.length}
+            packedItemsAmount={itemsPacked.length}
             allItemsAmount={items.length}
           />
         </Header>
