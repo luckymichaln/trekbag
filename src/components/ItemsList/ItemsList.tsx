@@ -1,6 +1,6 @@
 export type ItemsListState = Item[];
 
-export type Item = {
+type Item = {
   id: number;
   name: string;
   packed: boolean;

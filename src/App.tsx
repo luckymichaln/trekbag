@@ -20,7 +20,7 @@ function App() {
       packed: false,
     };
 
-    setItems([...items, newItem]);
+    setItems((prevItems) => [...prevItems, newItem]);
   };
 
   const handleRemoveItem = (id: number) => {
