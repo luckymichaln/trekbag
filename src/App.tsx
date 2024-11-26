@@ -11,6 +11,7 @@ import { Counter } from "./components/Counter/Counter";
 
 function App() {
   const [items, setItems] = useState<ItemsListState>(initialItems);
+  const reorderedItems = items.sort((a, b) => b.id - a.id);
   const itemsPacked = items.filter((item) => item.packed);
 
   const handleAddItem = (itemText: string) => {
@@ -45,7 +46,7 @@ function App() {
     });
   };
 
-  const handleToggleComplete = (id: number) => {
+  const handleToggleItem = (id: number) => {
     setItems((prev) => {
       return prev.map((prevItem) => {
         if (prevItem.id === id) {
@@ -79,8 +80,8 @@ function App() {
           />
         </Header>
         <ItemsList
-          items={items}
-          handleToggleComplete={handleToggleComplete}
+          items={reorderedItems}
+          handleToggleItem={handleToggleItem}
           handleRemoveItem={handleRemoveItem}
         />
         <Sidebar>

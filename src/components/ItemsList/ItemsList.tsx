@@ -1,3 +1,7 @@
+import Select from "react-select";
+import { EmptyView } from "../EmptyView/EmptyView";
+import { useState } from "react";
+
 export type ItemsListState = Item[];
 
 type Item = {
@@ -9,27 +13,68 @@ type Item = {
 type ItemListProps = {
   items: Item[];
   handleRemoveItem: (id: number) => void;
-  handleToggleComplete: (id: number) => void;
+  handleToggleItem: (id: number) => void;
 };
 
 type ItemProps = {
   item: Item;
   onRemoveItem: (id: number) => void;
-  onToggleComplete: (id: number) => void;
+  onToggleItem: (id: number) => void;
 };
+
+const sortingOptions = [
+  {
+    label: "Sort by default",
+    value: "default",
+  },
+  {
+    label: "Sort by packed",
+    value: "packed",
+  },
+  {
+    label: "Sort by unpacked",
+    value: "unpacked",
+  },
+];
 
 export const ItemsList = ({
   items,
-  handleToggleComplete,
+  handleToggleItem,
   handleRemoveItem,
 }: ItemListProps) => {
+  const [sortBy, setSortBy] = useState("default");
+
+  const sortedItems = [...items].sort((a, b): number => {
+    if (sortBy === "packed") {
+      return Number(b.packed) - Number(a.packed);
+    }
+
+    if (sortBy === "unpacked") {
+      return Number(a.packed) - Number(b.packed);
+    }
+
+    return 0;
+  });
+
   return (
     <ul>
-      {items.map((item) => (
+      {!items.length ? <EmptyView /> : null}
+
+      {items.length > 1 ? (
+        <section className="sorting">
+          <Select
+            onChange={(option) => setSortBy(option?.value as string)}
+            defaultValue={sortingOptions[0]}
+            options={sortingOptions}
+          />
+        </section>
+      ) : null}
+
+      {sortedItems.map((item) => (
         <Item
           item={item}
           key={item.id}
-          onToggleComplete={handleToggleComplete}
+          onToggleItem={handleToggleItem}
           onRemoveItem={handleRemoveItem}
         />
       ))}
@@ -37,7 +82,7 @@ export const ItemsList = ({
   );
 };
 
-const Item = ({ item, onToggleComplete, onRemoveItem }: ItemProps) => {
+const Item = ({ item, onToggleItem, onRemoveItem }: ItemProps) => {
   const handleRemoveItem = () => onRemoveItem(item.id);
 
   return (
@@ -46,7 +91,7 @@ const Item = ({ item, onToggleComplete, onRemoveItem }: ItemProps) => {
         <input
           type="checkbox"
           checked={item.packed}
-          onChange={() => onToggleComplete(item.id)}
+          onChange={() => onToggleItem(item.id)}
         />
         {item.name}
       </label>

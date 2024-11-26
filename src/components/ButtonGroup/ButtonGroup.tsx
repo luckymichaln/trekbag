@@ -1,4 +1,3 @@
-import { buttonsGroup } from "../../lib/contants";
 import { Button } from "../Button/Button";
 
 type buttonGroupProps = {
@@ -14,35 +13,37 @@ export const ButtonGroup = ({
   onResetAllItems,
   onRemoveAllItems,
 }: buttonGroupProps) => {
-  const handleButtonGroupClick = (role: string) => {
-    switch (role) {
-      case "complete":
-        onCompleteAllItems();
-        break;
-      case "incomplete":
-        onIncompleteAllItems();
-        break;
-      case "reset":
-        onResetAllItems();
-        break;
-      case "remove":
-        onRemoveAllItems();
-        break;
-      default:
-        () => null;
-    }
-  };
+  const buttonsGroup = [
+    {
+      label: "Mark all as complete",
+      onClick: onCompleteAllItems,
+    },
+    {
+      label: "Mark all as incomplete",
+      onClick: onIncompleteAllItems,
+    },
+    {
+      label: "Reset to initial",
+      onClick: onResetAllItems,
+    },
+    {
+      label: "Remove all items",
+      onClick: onRemoveAllItems,
+    },
+  ];
 
   return (
     <div className="button-group">
-      {buttonsGroup.map((button: { label: string; role: string }) => (
-        <Button
-          onClick={() => handleButtonGroupClick(button.role)}
-          key={button.label}
-          buttonType="secondary"
-          label={button.label}
-        />
-      ))}
+      {buttonsGroup.map(
+        ({ label, onClick }: { label: string; onClick: () => void }) => (
+          <Button
+            onClick={onClick}
+            key={label + onClick.toString()}
+            buttonType="secondary"
+            label={label}
+          />
+        )
+      )}
     </div>
   );
 };
