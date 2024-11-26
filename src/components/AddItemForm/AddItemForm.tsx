@@ -1,11 +1,11 @@
 import { FormEvent, useRef, useState } from "react";
 import { Button } from "../Button/Button";
 
-type AddItemFormProps = {
-  onAddItem: (value: string) => void;
+type AddItemProps = {
+  onAddItem: (itemText: string) => void;
 };
 
-export const AddItemForm = ({ onAddItem }: AddItemFormProps) => {
+export const AddItemForm = ({ onAddItem }: AddItemProps) => {
   const [value, setValue] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 

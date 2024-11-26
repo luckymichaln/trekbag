@@ -3,7 +3,7 @@ import { clsx } from "clsx";
 type ButtonProps = {
   label: string;
   buttonType?: "secondary";
-  onClick: () => void;
+  onClick?: () => void;
 };
 
 export const Button = ({ buttonType, label, onClick }: ButtonProps) => {

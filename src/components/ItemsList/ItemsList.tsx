@@ -1,6 +1,7 @@
 import Select from "react-select";
 import { EmptyView } from "../EmptyView/EmptyView";
 import { useMemo, useState } from "react";
+import { useItemsContext } from "../../hooks/useItemsContext";
 
 export type ItemsListState = Item[];
 
@@ -8,12 +9,6 @@ type Item = {
   id: number;
   name: string;
   packed: boolean;
-};
-
-type ItemListProps = {
-  items: Item[];
-  handleRemoveItem: (id: number) => void;
-  handleToggleItem: (id: number) => void;
 };
 
 type ItemProps = {
@@ -37,15 +32,13 @@ const sortingOptions = [
   },
 ];
 
-export const ItemsList = ({
-  items,
-  handleToggleItem,
-  handleRemoveItem,
-}: ItemListProps) => {
+export const ItemsList = () => {
+  const { items, handleToggleItem, handleRemoveItem } = useItemsContext();
   const [sortBy, setSortBy] = useState("default");
+  const reversedItems = [...items].sort((a, b) => b.id - a.id);
 
   const sortedItems = useMemo(() => {
-    return [...items].sort((a, b): number => {
+    return [...reversedItems].sort((a, b): number => {
       if (sortBy === "packed") {
         return Number(b.packed) - Number(a.packed);
       }
@@ -56,7 +49,7 @@ export const ItemsList = ({
 
       return 0;
     });
-  }, [items, sortBy]);
+  }, [reversedItems, sortBy]);
 
   return (
     <ul>

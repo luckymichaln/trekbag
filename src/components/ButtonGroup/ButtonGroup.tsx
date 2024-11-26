@@ -1,34 +1,30 @@
+import { useItemsContext } from "../../hooks/useItemsContext";
 import { Button } from "../Button/Button";
 
-type buttonGroupProps = {
-  onCompleteAllItems: () => void;
-  onIncompleteAllItems: () => void;
-  onResetAllItems: () => void;
-  onRemoveAllItems: () => void;
-};
+export const ButtonGroup = () => {
+  const {
+    handleCompleteAllItems,
+    handleIncompleteAllItems,
+    handleResetAllItems,
+    handleRemoveAllItems,
+  } = useItemsContext();
 
-export const ButtonGroup = ({
-  onCompleteAllItems,
-  onIncompleteAllItems,
-  onResetAllItems,
-  onRemoveAllItems,
-}: buttonGroupProps) => {
   const buttonsGroup = [
     {
       label: "Mark all as complete",
-      onClick: onCompleteAllItems,
+      onClick: handleCompleteAllItems,
     },
     {
       label: "Mark all as incomplete",
-      onClick: onIncompleteAllItems,
+      onClick: handleIncompleteAllItems,
     },
     {
       label: "Reset to initial",
-      onClick: onResetAllItems,
+      onClick: handleResetAllItems,
     },
     {
       label: "Remove all items",
-      onClick: onRemoveAllItems,
+      onClick: handleRemoveAllItems,
     },
   ];
 
