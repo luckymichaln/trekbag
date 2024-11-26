@@ -1,6 +1,6 @@
 import Select from "react-select";
 import { EmptyView } from "../EmptyView/EmptyView";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 export type ItemsListState = Item[];
 
@@ -44,17 +44,19 @@ export const ItemsList = ({
 }: ItemListProps) => {
   const [sortBy, setSortBy] = useState("default");
 
-  const sortedItems = [...items].sort((a, b): number => {
-    if (sortBy === "packed") {
-      return Number(b.packed) - Number(a.packed);
-    }
+  const sortedItems = useMemo(() => {
+    return [...items].sort((a, b): number => {
+      if (sortBy === "packed") {
+        return Number(b.packed) - Number(a.packed);
+      }
 
-    if (sortBy === "unpacked") {
-      return Number(a.packed) - Number(b.packed);
-    }
+      if (sortBy === "unpacked") {
+        return Number(a.packed) - Number(b.packed);
+      }
 
-    return 0;
-  });
+      return 0;
+    });
+  }, [items, sortBy]);
 
   return (
     <ul>

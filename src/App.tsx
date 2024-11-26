@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BackgroundHeading } from "./components/BackgroundHeading/BackgroundHeading";
 import { Header } from "./components/Header/Header";
 import { ItemsList, ItemsListState } from "./components/ItemsList/ItemsList";
@@ -10,9 +10,20 @@ import { Logo } from "./components/Logo/Logo";
 import { Counter } from "./components/Counter/Counter";
 
 function App() {
-  const [items, setItems] = useState<ItemsListState>(initialItems);
-  const reorderedItems = items.sort((a, b) => b.id - a.id);
+  const [items, setItems] = useState<ItemsListState>(() => {
+    const itemsFromLocalStorage = localStorage.getItem("items");
+    const parsedItems = itemsFromLocalStorage
+      ? JSON.parse(itemsFromLocalStorage)
+      : null;
+
+    return parsedItems.legth ? parsedItems : initialItems;
+  });
+  const reorderedItems = [...items].sort((a, b) => b.id - a.id);
   const itemsPacked = items.filter((item) => item.packed);
+
+  useEffect(() => {
+    localStorage.setItem("items", JSON.stringify(items));
+  }, [items]);
 
   const handleAddItem = (itemText: string) => {
     const newItem = {
