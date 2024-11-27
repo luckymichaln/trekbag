@@ -2,18 +2,17 @@ import { BackgroundHeading } from "./components/BackgroundHeading/BackgroundHead
 import { Header } from "./components/Header/Header";
 import { ItemsList } from "./components/ItemsList/ItemsList";
 import { Sidebar } from "./components/Sidebar/Sidebar";
-import { ItemsContextProvider } from "./contexts/ItemsContextProvider";
 
 function App() {
   return (
     <>
       <BackgroundHeading />
 
-      <ItemsContextProvider>
+      <main>
         <Header />
         <ItemsList />
         <Sidebar />
-      </ItemsContextProvider>
+      </main>
     </>
   );
 }

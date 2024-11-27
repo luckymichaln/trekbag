@@ -1,11 +1,11 @@
 import Select from "react-select";
 import { EmptyView } from "../EmptyView/EmptyView";
 import { useMemo, useState } from "react";
-import { useItemsContext } from "../../hooks/useItemsContext";
+import { useItemsStore } from "../../stores/itemsStore";
 
 export type ItemsListState = Item[];
 
-type Item = {
+export type Item = {
   id: number;
   name: string;
   packed: boolean;
@@ -33,7 +33,10 @@ const sortingOptions = [
 ];
 
 export const ItemsList = () => {
-  const { items, handleToggleItem, handleRemoveItem } = useItemsContext();
+  const items = useItemsStore((state) => state.items);
+  const toggleItem = useItemsStore((state) => state.toggleItem);
+  const removeItem = useItemsStore((state) => state.removeItem);
+
   const [sortBy, setSortBy] = useState("default");
   const reversedItems = [...items].sort((a, b) => b.id - a.id);
 
@@ -69,8 +72,8 @@ export const ItemsList = () => {
         <Item
           item={item}
           key={item.id}
-          onToggleItem={handleToggleItem}
-          onRemoveItem={handleRemoveItem}
+          onToggleItem={toggleItem}
+          onRemoveItem={removeItem}
         />
       ))}
     </ul>

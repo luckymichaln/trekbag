@@ -1,14 +1,13 @@
-import { useContext } from "react";
+import { useItemsStore } from "../../stores/itemsStore";
 import { AddItemForm } from "../AddItemForm/AddItemForm";
 import { ButtonGroup } from "../ButtonGroup/ButtonGroup";
-import { ItemsContext } from "../../contexts/ItemsContextProvider";
 
 export const Sidebar = () => {
-  const { handleAddItem } = useContext(ItemsContext);
+  const addItem = useItemsStore((state) => state.addItem);
 
   return (
     <aside className="sidebar">
-      <AddItemForm onAddItem={handleAddItem} />
+      <AddItemForm onAddItem={addItem} />
       <ButtonGroup />
     </aside>
   );
