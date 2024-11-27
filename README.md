@@ -6,6 +6,8 @@
 
 **Client:** React, TypeScript
 
+**State management:** Zustand
+
 ## Run Locally
 
 Clone the project
