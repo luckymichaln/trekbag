@@ -1,0 +1,32 @@
+.backgroundHeading {
+  font-size: 128px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.05);
+  position: absolute;
+  top: 7.5%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: -1;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+
+  @media (max-height: 950px) {
+    top: 5%;
+  }
+
+  @media (max-height: 916px) {
+    top: 3.5%;
+  }
+  
+  @media (max-height: 883px) {
+    top: 2.5%;
+  }
+  
+  @media (max-height: 850px) {
+    top: 0%;
+  }
+  
+  @media (max-height: 800px) {
+    top: -3%;
+  }
+}

@@ -1,6 +1,8 @@
 import { ItemsState, useItemsStore } from "../../stores/itemsStore";
 import { Button } from "../Button/Button";
 
+import styles from "./ButtonGroup.module.scss";
+
 export const ButtonGroup = () => {
   const markAllAsComplete = useItemsStore(
     (state: ItemsState) => state.markAllAsComplete
@@ -35,7 +37,7 @@ export const ButtonGroup = () => {
   ];
 
   return (
-    <div className="button-group">
+    <div className={styles.buttonGroup}>
       {buttonsGroup.map(
         ({ label, onClick }: { label: string; onClick: () => void }) => (
           <Button

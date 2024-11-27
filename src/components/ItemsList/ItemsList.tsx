@@ -3,6 +3,8 @@ import { EmptyView } from "../EmptyView/EmptyView";
 import { useMemo, useState } from "react";
 import { useItemsStore } from "../../stores/itemsStore";
 
+import styles from "./ItemsList.module.scss";
+
 export type ItemsListState = Item[];
 
 export type Item = {
@@ -55,11 +57,11 @@ export const ItemsList = () => {
   }, [reversedItems, sortBy]);
 
   return (
-    <ul>
+    <ul className={styles.itemList}>
       {!items.length ? <EmptyView /> : null}
 
       {items.length > 1 ? (
-        <section className="sorting">
+        <section className={styles.sorting}>
           <Select
             onChange={(option) => setSortBy(option?.value as string)}
             defaultValue={sortingOptions[0]}
@@ -84,9 +86,10 @@ const Item = ({ item, onToggleItem, onRemoveItem }: ItemProps) => {
   const handleRemoveItem = () => onRemoveItem(item.id);
 
   return (
-    <li className="item">
+    <li className={styles.item}>
       <label>
         <input
+          className={styles.itemInput}
           type="checkbox"
           checked={item.packed}
           onChange={() => onToggleItem(item.id)}

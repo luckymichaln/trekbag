@@ -1,5 +1,7 @@
 import { clsx } from "clsx";
 
+import styles from "./Button.module.scss";
+
 type ButtonProps = {
   label: string;
   buttonType?: "secondary";
@@ -7,8 +9,8 @@ type ButtonProps = {
 };
 
 export const Button = ({ buttonType, label, onClick }: ButtonProps) => {
-  const buttonClass = clsx("btn", {
-    "btn--secondary": buttonType === "secondary",
+  const buttonClass = clsx(styles.btn, {
+    [styles.btnSecondary]: buttonType === "secondary",
   });
 
   return (

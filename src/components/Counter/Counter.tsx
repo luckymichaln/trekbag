@@ -1,3 +1,5 @@
+import styles from "./Counter.module.scss";
+
 type CounterProps = {
   allItems: number;
   itemsPacked: number;
@@ -5,7 +7,7 @@ type CounterProps = {
 
 export const Counter = ({ allItems, itemsPacked }: CounterProps) => {
   return (
-    <p>
+    <p className={styles.counter}>
       <b>{itemsPacked}</b> / {allItems} items packed
     </p>
   );
